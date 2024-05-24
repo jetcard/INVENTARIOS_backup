@@ -1,0 +1,46 @@
+<h2 mat-dialog-title> {{ estadoFormulario }} nuevo Comun </h2>
+<mat-dialog-content>
+    <form [formGroup]="comunForm">
+        <div class="comun-container">
+            <mat-form-field>
+                <mat-label>Responsable</mat-label>
+                <mat-select formControlName="responsable">
+                    <mat-option *ngFor="let cat of responsables" [value]="cat.id">
+                        {{ cat.arearesponsable }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Tipo de bien</mat-label>
+                <mat-select formControlName="tipos">
+                    <mat-option *ngFor="let cat of tipos" [value]="cat.id">
+                        {{ cat.nombretipo }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>             
+            <mat-form-field>
+                <mat-label>Grupo</mat-label>
+                <mat-select formControlName="grupo">
+                    <mat-option *ngFor="let cat of grupos" [value]="cat.id">
+                        {{ cat.nombregrupo }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>            
+
+            <mat-form-field>
+                <textarea matInput placeholder="Descripción" formControlName="descripcomun" required></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Desc. corta" formControlName="descripcortacomun" required></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSave()" [disabled]="comunForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+</mat-dialog-actions>

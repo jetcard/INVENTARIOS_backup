@@ -1,0 +1,8 @@
+.articulo-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.articulo-container > * {
+    width: 100%;
+}

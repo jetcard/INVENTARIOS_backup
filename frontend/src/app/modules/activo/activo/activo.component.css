@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+}
+
+ul {
+  display: flex;
+}
+
+ul li {
+  list-style: none;
+  margin-right: 10px;
+}
+
+.alinear {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.column {
+  flex: 1 1 calc(33% - 20px); /* Ajusta el ancho de las columnas a tres partes iguales con espacio entre ellas */
+  min-width: 200px; /* Ajusta según sea necesario */
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.search-button {
+  width: 150px;
+  margin-left: 10px;
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px; /* Espacio vertical entre los contenedores */
+}
+
+@media (max-width: 600px) {
+  .column {
+    flex: 1 1 100%; /* En pantallas pequeñas, cada columna ocupa el 100% del ancho */
+    min-width: 100%;
+  }
+}

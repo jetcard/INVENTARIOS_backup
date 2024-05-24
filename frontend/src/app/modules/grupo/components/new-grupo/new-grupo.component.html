@@ -1,0 +1,32 @@
+<h2 mat-dialog-title> {{ estadoFormulario }} Nuevo Grupo </h2>
+<mat-dialog-content>
+
+    <form [formGroup]="grupoForm">
+        <div class="grupo-container">
+            <mat-form-field *ngIf="idAlfanumerico">
+                <input matInput placeholder="ID" formControlName="idAlfanumerico"  />
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nombre" formControlName="nombregrupo" required/>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Descripción" formControlName="descripgrupo" required></textarea>
+            </mat-form-field>
+
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-button color="primary" (click)="onSave()" [disabled]="grupoForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+
+</mat-dialog-actions>

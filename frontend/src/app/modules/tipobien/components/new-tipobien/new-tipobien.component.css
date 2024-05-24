@@ -1,0 +1,8 @@
+.tipobien-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.tipobien-container > * {
+    width: 100%;
+}

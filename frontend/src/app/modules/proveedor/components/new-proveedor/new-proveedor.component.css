@@ -1,0 +1,8 @@
+.proveedor-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.proveedor-container > * {
+    width: 100%;
+}
