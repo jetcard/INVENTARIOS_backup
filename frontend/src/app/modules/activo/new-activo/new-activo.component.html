@@ -30,9 +30,9 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <mat-form-field>
-            <input matInput type="number" placeholder="Moneda" formControlName="moneda" required>
-          </mat-form-field>          
+          <!--mat-form-field>
+            <input matInput placeholder="Moneda" formControlName="moneda" required>
+          </mat-form-field-->          
     </div>
     <div class="column">
         <mat-form-field>
@@ -60,9 +60,39 @@
             <input matInput placeholder="Nro. Serie" formControlName="nroserie" required>
           </mat-form-field>    
 
-          <mat-form-field>
+          <!--mat-form-field>
             <input matInput type="number" placeholder="Importe" formControlName="importe" required>
-          </mat-form-field>              
+          </mat-form-field-->
+          <!--mat-form-field>
+            <mat-label>Importe</mat-label>
+            <div fxLayout="row" fxLayoutAlign="start center" class="importe-moneda-container">
+              <mat-select formControlName="moneda" placeholder="Moneda">
+                <mat-option value="S/">S/</mat-option>
+                <mat-option value="$">$</mat-option>
+              </mat-select>
+              <input matInput type="number" formControlName="importe" placeholder="Importe" required>
+            </div>
+          </mat-form-field-->
+          <!--mat-form-field class="importe-moneda-field">
+            <div class="importe-moneda-container">
+              <mat-select formControlName="moneda" class="moneda-select">
+                <mat-option value="S/">S/</mat-option>
+                <mat-option value="$">$</mat-option>
+              </mat-select>
+              <input matInput type="number" formControlName="importe" placeholder="Importe" required class="importe-input">
+            </div>
+          </mat-form-field-->
+          <div class="importe-moneda-container">
+            <mat-form-field class="moneda-select-field">
+              <mat-select formControlName="moneda" class="moneda-select">
+                <mat-option value="S/">S/</mat-option>
+                <mat-option value="$">$</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="importe-input-field">
+              <input matInput type="number" formControlName="importe" placeholder="Importe" required class="importe-input">
+            </mat-form-field>
+          </div>                    
       </div>
       <div class="column">
 

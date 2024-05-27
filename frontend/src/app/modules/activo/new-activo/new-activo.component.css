@@ -14,4 +14,75 @@
   mat-form-field {
     width: 100%;
   }
+  /*
+  mat-form-field {
+    width: 100%;
+  }
   
+  .fxLayout-row {
+    display: flex;
+    align-items: center;
+  }
+  
+  mat-select {
+    margin-right: 10px;
+  }
+
+  .activo-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .column {
+    flex: 1;
+    min-width: 300px;
+    margin: 10px;
+  }
+  */
+  .importe-moneda-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .moneda-select {
+    margin-right: 10px;
+    width: 80px;
+  }
+  
+  .importe-input {
+    flex: 1;
+  }
+
+  /**/
+  .activo-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .column {
+    flex: 1;
+    min-width: 300px;
+    margin: 10px;
+  }
+  
+  .importe-moneda-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .moneda-select-field {
+    margin-right: 10px;
+    width: 80px; /* Ajusta el ancho del select */
+  }
+  
+  .importe-input-field {
+    flex: 1;
+  }
+  
+  .moneda-select {
+    width: 100%;
+  }
+  
+  .importe-input {
+    width: 100%;
+  }

@@ -1,9 +1,11 @@
-<h2 mat-dialog-title> {{ estadoFormulario }} Nuevo Tipo de Bien </h2>
+<h2 mat-dialog-title> {{ estadoFormulario }} Tipo de Bien </h2>
 <mat-dialog-content>
 
     <form [formGroup]="tipoBienForm">
         <div class="tipobien-container">
-
+            <div *ngIf="idAlfanumerico" class="custom-label">
+                <h2>{{ idAlfanumerico }}</h2>
+            </div>
             <mat-form-field>
                 <input matInput placeholder="Nombre" formControlName="nombretipo" required/>
             </mat-form-field>

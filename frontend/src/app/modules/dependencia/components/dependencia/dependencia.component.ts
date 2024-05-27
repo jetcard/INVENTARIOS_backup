@@ -7,6 +7,19 @@ import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/conf
 import { DependenciaService } from 'src/app/modules/shared/services/dependencia.service';
 import { UtilService } from 'src/app/modules/shared/services/util.service';
 import { NewDependenciaComponent } from '../new-dependencia/new-dependencia.component';
+import { Router } from '@angular/router'; // Importa Router
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { ResponsableComponent } from './../../../responsable/components/responsable/responsable.component';
+import { TipoBienComponent } from './../../../tipobien/components/tipobien/tipobien.component';
+import { GrupoComponent } from './../../../grupo/components/grupo/grupo.component';
+import { ArticuloComponent } from './../../../articulo/components/articulo/articulo.component';
+import { ActivoComponent } from './../../../activo/activo/activo.component';
+import { ProveedorComponent } from './../../../proveedor/components/proveedor/proveedor.component';
+import { ComunComponent } from './../../../comun/comun/comun.component';
+import { AtributoComponent } from './../../../atributo/atributo/atributo.component';
+import { AtributosComponent } from './../../../atributos/atributos/atributos.component';
+
 
 @Component({
   selector: 'app-dependencia',
@@ -16,35 +29,36 @@ import { NewDependenciaComponent } from '../new-dependencia/new-dependencia.comp
 export class DependenciaComponent implements OnInit{
 
   isAdmin: any;
+  private router = inject(Router);
   private dependenciaService = inject(DependenciaService);
   private snackBar = inject(MatSnackBar);
   public dialog = inject(MatDialog);
   private util = inject (UtilService);
 
+  menuNav = [
+    { name: "Responsable", route: "responsable", icon: "moneda_box" },
+    { name: "Tipo de Bien", route: "tipobien", icon: "desktop" },
+    { name: "Articulos", route: "articulo", icon: "assessments" },
+    { name: "Grupos", route: "grupo", icon: "tablet" },
+//    { name: "Activos", route: "activo", icon: "card_travel" },
+    { name: "Proveedores", route: "proveedor", icon: "assignment" },
+//    { name: "Dependencias", route: "dependencia", icon: "assignment" },
+    { name: "Comunes", route: "comun", icon: "wallet" },
+    { name: "Atributo", route: "atributo", icon: "bookmark" },
+    { name: "Atributos", route: "atributos", icon: "bookmark" }
+  ];
+
+  selectedComponent: any;
+
   ngOnInit(): void {
-    this.getDependenciass();
     console.log(this.util.getRoles());
     this.isAdmin = this.util.isAdmin();
   }
 
-  displayedColumns: string[] = ['id', 'nombredependencia', 'descripdependencia', 'actions'];
   dataSource = new MatTableDataSource<DependenciaElement>();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-
-  getDependenciass(): void {
-
-    this.dependenciaService.getDependencias()
-      .subscribe( (data:any) => {
-
-        console.log("respuesta dependencias: ", data);
-        this.processDependenciasResponse(data);
-
-      }, (error: any) => {
-        console.log("error: ", error);
-      })
-  }
 
   processDependenciasResponse(resp: any){
 
@@ -65,90 +79,27 @@ export class DependenciaComponent implements OnInit{
 
   }
 
-  openDependenciaDialog(){
-    const dialogRef = this.dialog.open(NewDependenciaComponent , {
-      width: '450px'
-    });
-
-    dialogRef.afterClosed().subscribe((result:any) => {
-      
-      if( result == 1){
-        this.openSnackBar("Dependencia agregada", "Éxito");
-        this.getDependenciass();
-      } else if (result == 2) {
-        this.openSnackBar("Se produjo un error al guardar la dependencia", "Error");
-      }
-    });
+  
+  navigateTo(route: string) {
+    //this.router.navigate([route]);
+    this.selectedComponent = this.getComponentByRoute(route);
   }
 
-  edit(id:number, nombredependencia: string, descripdependencia: string){
-    const dialogRef = this.dialog.open(NewDependenciaComponent , {
-      width: '450px',
-      data: {id: id, nombredependencia: nombredependencia, descripdependencia: descripdependencia}
-    });
-
-    dialogRef.afterClosed().subscribe((result:any) => {
-      
-      if( result == 1){
-        this.openSnackBar("Dependencia Actualizado", "Éxito");
-        this.getDependenciass();
-      } else if (result == 2) {
-        this.openSnackBar("Se produjo un error al actualizar el dependencia", "Error");
-      }
-    });
-  }
-
-  delete(id: any){
-    const dialogRef = this.dialog.open(ConfirmComponent , {
-      data: {id: id, module: "dependencia"}
-    });
-
-    dialogRef.afterClosed().subscribe((result:any) => {
-      
-      if( result == 1){
-        this.openSnackBar("Dependencia Eliminada", "Exitosa");
-        this.getDependenciass();
-      } else if (result == 2) {
-        this.openSnackBar("Se produjo un error al eliminar la dependencia", "Error");
-      }
-    });
-  }
-
-  buscar( termino: string){
-
-    if( termino.length === 0){
-      return this.getDependenciass();
+  getComponentByRoute(route: string) {
+    switch(route) {
+      case 'responsable': return ResponsableComponent;
+      case 'tipobien': return TipoBienComponent;
+      case 'articulo': return ArticuloComponent;
+      case 'grupo': return GrupoComponent;
+      case 'activo': return ActivoComponent;
+      case 'proveedor': return ProveedorComponent;
+      case 'comun': return ComunComponent;
+      case 'atributo': return AtributoComponent;
+      case 'atributos': return AtributosComponent;
+      default: return null;
     }
-
-    this.dependenciaService.getDependenciaByModelo(termino)
-            .subscribe( (resp: any) => {
-              this.processDependenciasResponse(resp);
-            })
   }
 
-  openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar>{
-    return this.snackBar.open(message, action, {
-      duration: 2000
-    })
-
-  }
-
-  exportExcel(){
-    this.dependenciaService.exportDependencia()
-        .subscribe( (data: any) => {
-          let file = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
-          let fileUrl = URL.createObjectURL(file);
-          var anchor = document.createElement("a");
-          anchor.download = "dependencias.xlsx";
-          anchor.href = fileUrl;
-          anchor.click();
-
-          this.openSnackBar("Archivo exportado correctamente", "Exitosa");
-        }, (error: any) =>{
-          this.openSnackBar("No se pudo exportar el archivo", "Error");
-        })
-
-  }
 
 }
 

@@ -172,13 +172,13 @@ export class NewActivoComponent implements OnInit{
         }
       );
     } 
-    this.logJsonValue();   
+    ///this.logJsonValue();   
   }
-
+/*
   logJsonValue() {
     console.log(this.getJsonValue());
   }
-
+*/
   onCancel(){
     this.dialogRef.close(3);
   }
@@ -246,7 +246,7 @@ export class NewActivoComponent implements OnInit{
     })
   }
 
-  getJsonValue() {
+/*  getJsonValue() {
     return {
       modelo: this.activoForm.get('modelo')?.value,
       marca: this.activoForm.get('marca')?.value,
@@ -260,6 +260,6 @@ export class NewActivoComponent implements OnInit{
       tipoId: this.activoForm.get('tipo')?.value,
       articuloId: this.activoForm.get('articulo')?.value
     };
-  }  
+  }  */
 
 }
